@@ -1,0 +1,14 @@
+name: shell
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    
+    steps:
+    - name: install
+      run: |
+        sudo apt-get install -y shellinabox
+        sudo systemctl start shellinabox
+        
