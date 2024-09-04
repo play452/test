@@ -15,7 +15,7 @@ jobs:
 
     - name: install neofetch
       run: |
-        apt install sudo neofetch
+        sudo apt install sudo neofetch
         neofetch
 
         
