@@ -25,8 +25,8 @@ jobs:
       run: |
         sudo mkdir /etc/letsencrypt
         sudo mkdir /etc/letsencrypt/live
-        sudo mkdir /etc/letsencrypt/live/usa1.hyghj.eu.com
-        cd /etc/letsencrypt/live/usa1.hyghj.eu.com
+        sudo mkdir /etc/letsencrypt/live/usa1.hyghj.eu.org
+        cd /etc/letsencrypt/live/usa1.hyghj.eu.org
         sudo openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/C=NA/ST=NA/L=NA/O=NA/CN=Generic SSL Certificate" -keyout privkey.pem -out fullchain.pem
 
         
