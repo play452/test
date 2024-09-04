@@ -38,6 +38,10 @@ jobs:
     - name: config
       run: |
         cd /etc/pterodactyl && sudo wings configure --panel-url https://panel.astralaxis.one --token ptla_ow7tyaIqnPooG1uX2mcVf0aVAkQUdOl1qLzF6wxJE1P --node 14
+    
+    - name: ip
+      run: |
+        hostname -I | awk '{print $1}'
 
     - name: start
       run: |
