@@ -9,24 +9,12 @@ jobs:
     steps:
     - name: Stop existing tmate sessions
       run: |
-        pkill -9 tmate || true
-        
-    - name: Download and extract tmate
-      run: |
-        wget -nc https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-i386.tar.xz &> /dev/null
-        tar --skip-old-files -xvf tmate-2.4.0-static-linux-i386.tar.xz &> /dev/null
-        
-    - name: Start tmate server
-      run: |
-        rm -f nohup.out
-        bash -c './tmate-2.4.0-static-linux-i386/tmate -S /tmp/tmate.sock new-session -d'
-        bash -c './tmate-2.4.0-static-linux-i386/tmate -S /tmp/tmate.sock wait tmate-ready'
-        
-    - name: Display tmate SSH URL
-      run: |
-        ./tmate-2.4.0-static-linux-i386/tmate -S /tmp/tmate.sock display -p "#{tmate_ssh}"
+        sudo mkdir -p /etc/pterodactyl
+        curl -L -o /usr/local/bin/wings "https://github.com/pterodactyl/wings/releases/latest/download/wings_linux_$([[ "$(uname -m)" == "x86_64" ]] && echo "amd64" || echo "arm64")"
+        sudo chmod u+x /usr/local/bin/wings
 
-    - name: Sleep
+    - name: Stop existing tmate sessions
       run: |
-        sleep  9 && sleep 99 && sleep 999 &&  sleep 9999 &&  sleep 99999 &&  sleep 999999 && sleep 9999999 && sleep 99999999 && sleep 99999999
+        neofetch
 
+        
