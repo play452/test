@@ -1,27 +1,18 @@
-name: shell
+name: ptero
 
 on: [push, workflow_dispatch]
 
 jobs:
-  build-and-deploy:
+  build:
+    timeout-minutes: 14400
     runs-on: ubuntu-22.04
     
     steps:
-    - name: Checkout 🛎️
-      uses: actions/checkout@v3
-      
-    - name: Install dependencies
+    - name: cloudflare
       run: |
-        sudo apt-get update
-        sudo apt-get install -y shellinabox
-        
-    - name: Start Shellinabox
+        curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && sudo dpkg -i cloudflared.deb && sudo cloudflared service install eyJhIjoiMWE1MTc4MTE0YTZjOWZmNDllMzZiNmMxNzVlOTZiYjkiLCJ0IjoiMjYzOTZhNWMtYmMzOC00NjZlLThiMDgtMDNjZWM4Njg5ODFmIiwicyI6Ik1qZGlaREl4T1dFdE9URmxZUzAwWW1ZekxUbGpOalV0TnpZM09XSmpNVE16WkdWaiJ9
+
+    - name: docker start
       run: |
-        sudo systemctl start shellinabox
-        
-    - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: gh-pages
-        folder: .
-        token: ${{ secrets.GITHUB_TOKEN }}
+        docker pull hlohaus789/g4f
+        docker run -p 8080:8080 -p 1337:1337 -p 7900:7900 --shm-size="2g" -v ${PWD}/har_and_cookies:/app/har_and_cookies -v ${PWD}/generated_images:/app/generated_images hlohaus789/g4f:latest
